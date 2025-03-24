@@ -96,7 +96,7 @@ mode_change_btn=CTkButton(windo,
                           width=30,
                           height=30,
                           font=("Helvetica",12,"bold"))
-mode_change_btn.place(x=350,y=5)
+mode_change_btn.place(x=385,y=10)
 
 titel_leble=CTkLabel(windo,
                      text="Currency Converter",
