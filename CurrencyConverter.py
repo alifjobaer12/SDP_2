@@ -80,6 +80,9 @@ windo=CTk()
 windo.title("Currency Converter")
 windo.geometry("430x250")
 windo.resizable(height=False,width=False)
+
+
+
 exc_btn_img_black = CTkImage(light_image=Image.open('image/logo black.png'),
                        dark_image=Image.open('image/logo black.png'),
                        size=(33,33))
