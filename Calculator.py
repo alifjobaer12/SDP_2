@@ -37,7 +37,6 @@ def clear():
     input_box.configure(state="normal")
     input_box.delete(1.0,"end")
     input_box.configure(state="disabled")
-    
 
 
 calculate_windo = CTk()
