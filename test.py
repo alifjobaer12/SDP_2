@@ -11,14 +11,14 @@ root.geometry("500x400")
 root.title("Tabview with Different Icons")
 
 # Load Different Icons for Each Tab
-icon1 = ctk.CTkImage(light_image=Image.open("image/calculator.png"), size=(20, 20))  # Tab 1 icon
-icon2 = ctk.CTkImage(light_image=Image.open("image/exchange.png"), size=(20, 20))  # Tab 2 icon
-icon3 = ctk.CTkImage(light_image=Image.open("image/unit-1png.png"), size=(20, 20))  # Tab 3 icon
+icon1 = ctk.CTkImage(light_image=Image.open("image/calculator.png"), size=(22, 22))  # Tab 1 icon
+icon2 = ctk.CTkImage(light_image=Image.open("image/exchange.png"), size=(22, 22))  # Tab 2 icon
+icon3 = ctk.CTkImage(light_image=Image.open("image/unit-1png.png"), size=(22, 22))  # Tab 3 icon
 
 # Load Selected Icons (When Tab is Clicked)
-icon1_selected = ctk.CTkImage(light_image=Image.open("image/calculator.png"), size=(20, 20))
-icon2_selected = ctk.CTkImage(light_image=Image.open("image/exchange.png"), size=(20, 20))
-icon3_selected = ctk.CTkImage(light_image=Image.open("image/unit-1png.png"), size=(20, 20))
+# icon1_selected = ctk.CTkImage(light_image=Image.open("image/calculator.png"), size=(20, 20))
+# icon2_selected = ctk.CTkImage(light_image=Image.open("image/exchange.png"), size=(20, 20))
+# icon3_selected = ctk.CTkImage(light_image=Image.open("image/unit-1png.png"), size=(20, 20))
 
 # Create Tabview
 main_tab = ctk.CTkTabview(root)
@@ -42,16 +42,17 @@ buttons = main_tab._segmented_button._buttons_dict
 
 # Initial Icon Setup (3 Different Icons)
 icons = [icon1, icon2, icon3]  # Initial icons for each tab
-selected_icons = [icon1_selected, icon2_selected, icon3_selected]  # Selected icons
+# selected_icons = [icon1_selected, icon2_selected, icon3_selected] 
+
+
 for i, (name, btn) in enumerate(buttons.items()):
-    btn.configure(text=" ", image=icons[i]) 
- # Set individual icons at start
+    btn.configure(text=" ", image=icons[i], bg_color="transparent") 
 
 
 
 for j, (name, btn) in enumerate(buttons.items()):
     if j == 0:
-        btn.configure(text=tab_names[j], image=selected_icons[j])  # Show text + new icon
+        btn.configure(text=tab_names[j], image=icons[j])  # Show text + new icon
     else:
         btn.configure(text=" ", image=icons[j])
 
@@ -62,7 +63,7 @@ def update_tabs(selected_index):
 
     for i, (name, btn) in enumerate(buttons.items()):
         if i == selected_index:
-            btn.configure(text=tab_names[i], image=selected_icons[i])
+            btn.configure(text=tab_names[i], image=icons[i])
               # Show text + new icon
         else:
             btn.configure(text=" ", image=icons[i])  # Show only original icon

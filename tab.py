@@ -13,6 +13,7 @@ c=CurrencyConverter()
 font_12 = ("Helvetica",12,"bold")
 font_16 = ("Helvetica",16,"bold")
 font_14 = ("Helvetica",14,"bold")
+font_18 = ("Helvetica",18,"bold")
 font_22 = ("Helvetica",22,"bold")
 font_24 = ("Helvetica",24,"bold")
 font_38 = ("Helvetica",38,"bold")
@@ -137,6 +138,17 @@ def convaercurrency():
 
 
 
+def update_tabs(selected_index):
+    main_tab.set(tab_names[selected_index])
+
+    for i, (name, btn) in enumerate(buttons.items()):
+        if i == selected_index:
+            btn.configure(text=tab_names[i], image=icons[i])
+        else:
+            btn.configure(text=" ", image=icons[i])
+
+
+
 main_windo = CTk()                                                                 # main window
 main_windo.geometry("500x600")
 
@@ -154,6 +166,14 @@ mode_change_btn.place(x=468,y=10)
 main_tab = CTkTabview(main_windo, width=430, height=500)                           # main tab
 main_tab.pack()
 
+
+
+icon1 = CTkImage(light_image=Image.open("image/calculator.png"), size=(22, 22))
+icon2 = CTkImage(light_image=Image.open("image/exchange.png"), size=(22, 22))
+icon3 = CTkImage(light_image=Image.open("image/unit-1png.png"), size=(22, 22))
+
+icons = [icon1, icon2, icon3]
+tab_names = ["Calculator", "Currency Converter", "Unit Converter"]
 
 
 
@@ -184,45 +204,45 @@ input_box = CTkTextbox(calculator_fram, height=70,width=300, state="disabled", f
 input_box.grid(columnspan=5, pady=10,padx=10)
 
 
-num_c = CTkButton(calculator_fram, width=60, height=60 ,font=font_16, text="C", command=clear)
+num_c = CTkButton(calculator_fram, width=60, height=60 ,font=font_16, text="C", command=clear, fg_color="#74cec6", text_color="red" )
 num_c.grid(row=1, column=1, padx=5, pady=5)
-num_open_brackt = CTkButton(calculator_fram, width=60, height=60 ,font=font_16, text="(",command=lambda :valu_input("("))
+num_open_brackt = CTkButton(calculator_fram, width=60, height=60 ,font=font_16, text="(", text_color="black", fg_color="#74cec6", command=lambda :valu_input("("))
 num_open_brackt.grid(row=1, column=2, padx=5, pady=5)
-num_close_brackt = CTkButton(calculator_fram, width=60, height=60 ,font=font_16, text=")",command=lambda :valu_input(")"))
+num_close_brackt = CTkButton(calculator_fram, width=60, height=60 ,font=font_16, text=")", fg_color="#74cec6",  text_color="black", command=lambda :valu_input(")"))
 num_close_brackt.grid(row=1, column=3, padx=5, pady=5)
 
-num_1 = CTkButton(calculator_fram, width=60, height=60 ,font=font_16, text="1",command=lambda: valu_input("1"))
+num_1 = CTkButton(calculator_fram, width=60, height=60 ,font=font_16, text="1", fg_color="#0f1320", command=lambda: valu_input("1"))
 num_1.grid(row=4, column=1, padx=5, pady=5)
-num_2 = CTkButton(calculator_fram, width=60, height=60,font=font_16, text="2",command=lambda: valu_input("2"))
+num_2 = CTkButton(calculator_fram, width=60, height=60,font=font_16, text="2", fg_color="#0f1320", command=lambda: valu_input("2"))
 num_2.grid(row=4, column=2, padx=5, pady=5)
-num_3 = CTkButton(calculator_fram, width=60, height=60,font=font_16, text="3",command=lambda: valu_input("3"))
+num_3 = CTkButton(calculator_fram, width=60, height=60,font=font_16, text="3", fg_color="#0f1320", command=lambda: valu_input("3"))
 num_3.grid(row=4, column=3, padx=5, pady=5)
-num_4 = CTkButton(calculator_fram, width=60, height=60,font=font_16, text="4",command=lambda: valu_input("4"))
+num_4 = CTkButton(calculator_fram, width=60, height=60,font=font_16, text="4", fg_color="#0f1320", command=lambda: valu_input("4"))
 num_4.grid(row=3, column=1, padx=5, pady=5)
-num_5 = CTkButton(calculator_fram, width=60, height=60,font=font_16, text="5",command=lambda: valu_input("5"))
+num_5 = CTkButton(calculator_fram, width=60, height=60,font=font_16, text="5", fg_color="#0f1320", command=lambda: valu_input("5"))
 num_5.grid(row=3, column=2, padx=5, pady=5)
-num_6 = CTkButton(calculator_fram, width=60, height=60,font=font_16, text="6",command=lambda: valu_input("6"))
+num_6 = CTkButton(calculator_fram, width=60, height=60,font=font_16, text="6", fg_color="#0f1320", command=lambda: valu_input("6"))
 num_6.grid(row=3, column=3, padx=5, pady=5)
-num_7 = CTkButton(calculator_fram, width=60, height=60,font=font_16, text="7",command=lambda: valu_input("7"))
+num_7 = CTkButton(calculator_fram, width=60, height=60,font=font_16, text="7", fg_color="#0f1320", command=lambda: valu_input("7"))
 num_7.grid(row=2, column=1, padx=5, pady=5)
-num_8 = CTkButton(calculator_fram, width=60, height=60,font=font_16, text="8",command=lambda: valu_input("8"))
+num_8 = CTkButton(calculator_fram, width=60, height=60,font=font_16, text="8", fg_color="#0f1320", command=lambda: valu_input("8"))
 num_8.grid(row=2, column=2, padx=5, pady=5)
-num_9 = CTkButton(calculator_fram, width=60, height=60,font=font_16, text="9",command=lambda: valu_input("9"))
+num_9 = CTkButton(calculator_fram, width=60, height=60,font=font_16, text="9", fg_color="#0f1320", command=lambda: valu_input("9"))
 num_9.grid(row=2, column=3, padx=5, pady=5)
-num_0 = CTkButton(calculator_fram, width=60, height=60,font=font_16, text="0",command=lambda: valu_input("0"))
+num_0 = CTkButton(calculator_fram, width=60, height=60,font=font_16, text="0", fg_color="#0f1320", command=lambda: valu_input("0"))
 num_0.grid(row=5, column=2, padx=5, pady=5)
-num_0 = CTkButton(calculator_fram, width=60, height=60,font=font_16, text=".",command=lambda: valu_input("."))
+num_0 = CTkButton(calculator_fram, width=60, height=60,font=font_16, text=".", fg_color="#0f1320", command=lambda: valu_input("."))
 num_0.grid(row=5, column=1, padx=5, pady=5)
-num_eq = CTkButton(calculator_fram, width=60, height=60,font=font_16, text="=",command=calculation)
+num_eq = CTkButton(calculator_fram, width=60, height=60,font=font_16, text="=", fg_color="#0f1320", command=calculation)
 num_eq.grid(row=5, column=3, padx=5, pady=5)
 
-num_plus = CTkButton(calculator_fram, width=60, height=130,font=font_16, text="+",command=lambda: valu_input("+"))
+num_plus = CTkButton(calculator_fram, width=60, height=130,font=font_16, text="+", text_color="black", fg_color="#74cec6", command=lambda: valu_input("+"))
 num_plus.grid(row=4, column=4,rowspan=2, padx=5, pady=5)
-num_minus = CTkButton(calculator_fram, width=60, height=60,font=font_24, text="-",command=lambda: valu_input("-"))
+num_minus = CTkButton(calculator_fram, width=60, height=60,font=font_24, text="-", text_color="black", fg_color="#74cec6", command=lambda: valu_input("-"))
 num_minus.grid(row=3, column=4, padx=5, pady=5)
-num_mul = CTkButton(calculator_fram, width=60, height=60,font=font_24, text="*",command=lambda: valu_input("*"))
+num_mul = CTkButton(calculator_fram, width=60, height=60,font=font_24, text="*", text_color="black", fg_color="#74cec6", command=lambda: valu_input("*"))
 num_mul.grid(row=2, column=4, padx=5, pady=5)
-num_div = CTkButton(calculator_fram, width=60, height=60,font=font_16, text="/",command=lambda: valu_input("/"))
+num_div = CTkButton(calculator_fram, width=60, height=60,font=font_18, text="/", text_color="black", fg_color="#74cec6", command=lambda: valu_input("/"))
 num_div.grid(row=1, column=4, padx=5, pady=5)
 
 
@@ -334,5 +354,20 @@ convart_btn=CTkButton(windo,
 convart_btn.place(x=150,y=180)
 
 
+
+buttons = main_tab._segmented_button._buttons_dict
+
+for i, (name, btn) in enumerate(buttons.items()):
+    btn.configure(text="", image=icons[i], bg_color="transparent", font=font_12, border_width=2, border_spacing=4 ) 
+
+for j, (name, btn) in enumerate(buttons.items()):
+    if j == 0:
+        btn.configure(text=tab_names[j], image=icons[j])
+    else:
+        btn.configure(text=" ", image=icons[j])
+
+
+for i, btn in enumerate(buttons.values()):
+    btn.configure(command=lambda idx=i: update_tabs(idx))
 
 main_windo.mainloop()
