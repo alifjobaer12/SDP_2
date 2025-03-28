@@ -138,11 +138,11 @@ def convaercurrency():
 
 
 
-def update_tabs(selected_index):
-    main_tab.set(tab_names[selected_index])
+def update_tabs(s_tab):
+    main_tab.set(tab_names[s_tab])
 
-    for i, (name, btn) in enumerate(buttons.items()):
-        if i == selected_index:
+    for i, (name, btn) in enumerate(tab_buttons.items()):
+        if i == s_tab:
             btn.configure(text=tab_names[i], image=icons[i])
         else:
             btn.configure(text=" ", image=icons[i])
@@ -355,19 +355,19 @@ convart_btn.place(x=150,y=180)
 
 
 
-buttons = main_tab._segmented_button._buttons_dict
+tab_buttons = main_tab._segmented_button._buttons_dict
 
-for i, (name, btn) in enumerate(buttons.items()):
+for i, (name, btn) in enumerate(tab_buttons.items()):
     btn.configure(text="", image=icons[i], bg_color="transparent", font=font_12, border_width=2, border_spacing=4 ) 
 
-for j, (name, btn) in enumerate(buttons.items()):
+for j, (name, btn) in enumerate(tab_buttons.items()):
     if j == 0:
         btn.configure(text=tab_names[j], image=icons[j])
     else:
         btn.configure(text=" ", image=icons[j])
 
 
-for i, btn in enumerate(buttons.values()):
-    btn.configure(command=lambda idx=i: update_tabs(idx))
+for i, btn in enumerate(tab_buttons.values()):
+    btn.configure(command=lambda tab_n=i: update_tabs(tab_n))
 
 main_windo.mainloop()
