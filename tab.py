@@ -105,17 +105,17 @@ def exc_btn():
     from_convart_box.set(too)
     to_convart_box.set(form)
 
-def convaercurrency():
+def convertcurrency():
     global n, frm
     try:
-        n=int(from_lable.get())
+        n=float(from_lable.get())
     except:
         n=0
     frm = from_convart_box.get()
     to = to_convart_box.get()
     try:
-        ans=c.convert(n,frm,to)
-        ans= round(ans,2)
+        ans=str(c.convert(n,frm,to))
+        ans=str(round(ans,2))
         to_lable.configure(text=str(ans))
     except:
         if frm =='BDT' or to == 'BDT':
@@ -125,14 +125,14 @@ def convaercurrency():
                 bdt= round(bdt,2)
                 to_lable.configure(text=str(bdt))
             elif frm == 'BDT' and to != 'BDT':
-                bdt = c.convert(n,'USD',to)
-                bdt = bdt/121.47                                          #change with the current valu USD to BDT
+                bdt = c.convert(n,'EUR',to)
+                bdt = bdt/131.84                                          #change with the current valu EUR to BDT
                 bdt= round(bdt,2)
                 to_lable.configure(text=str(bdt))
             else:
                 to_lable.configure(text=n)
         else:
-            to_lable.configure(text="Error")
+            to_lable.configure(text=n)
 
 # currency convator functions end
 
@@ -340,7 +340,7 @@ to_lable=CTkLabel(windo,
                   justify="center",
                   width=135,
                   height=23,
-                  corner_radius=7,
+                  corner_radius=2,
                   fg_color="#343638",
                   bg_color="#343638",
                   font=font_14,)
@@ -350,7 +350,7 @@ to_lable.place(x=252,y=132)
 convart_btn=CTkButton(windo,
                       text="Convert",
                       font=font_14,
-                      command=convaercurrency)
+                      command=convertcurrency)
 convart_btn.place(x=150,y=180)
 
 
