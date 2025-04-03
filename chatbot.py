@@ -29,7 +29,7 @@ while True:
             break
         
         response = chat.send_message(message)
-        print('Chatbot:', response.text)
+        print(f"Chatbot: {response.text}" )
         print()
 
     except Exception as e:

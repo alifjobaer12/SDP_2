@@ -1,76 +1,68 @@
-import customtkinter as ctk
-from PIL import Image
-
-# Initialize CustomTkinter
-ctk.set_appearance_mode("dark")
-ctk.set_default_color_theme("blue")
-
-# Create Main Window
-root = ctk.CTk()
-root.geometry("500x400")
-root.title("Tabview with Different Icons")
-
-# Load Different Icons for Each Tab
-icon1 = ctk.CTkImage(light_image=Image.open("image/calculator.png"), size=(22, 22))  # Tab 1 icon
-icon2 = ctk.CTkImage(light_image=Image.open("image/exchange.png"), size=(22, 22))  # Tab 2 icon
-icon3 = ctk.CTkImage(light_image=Image.open("image/unit-1png.png"), size=(22, 22))  # Tab 3 icon
-
-# Load Selected Icons (When Tab is Clicked)
-# icon1_selected = ctk.CTkImage(light_image=Image.open("image/calculator.png"), size=(20, 20))
-# icon2_selected = ctk.CTkImage(light_image=Image.open("image/exchange.png"), size=(20, 20))
-# icon3_selected = ctk.CTkImage(light_image=Image.open("image/unit-1png.png"), size=(20, 20))
-
-# Create Tabview
-main_tab = ctk.CTkTabview(root)
-main_tab.pack(pady=20, padx=20, fill="both", expand=True)
-
-tab_names = ["Calculator", "Currency Converter", "Unit Converter"]  # Tab Names
-# Tab Names
-calculator_tab = main_tab.add("Calculator")
-currency_converter_tab = main_tab.add("Currency Converter")
-unit_converter_tab = main_tab.add("Unit Converter")
-
-
-# Add Content to Tabs
-# for i, tab in enumerate(tab_names):
-tab_1 = ctk.CTkLabel(calculator_tab, text=f"This is calculator").pack(pady=10)
-tab_2 = ctk.CTkLabel(currency_converter_tab, text=f"This is currency").pack(pady=10)
-tab_3 = ctk.CTkLabel(unit_converter_tab, text=f"This is unit").pack(pady=10)
-
-# Get Button Dictionary
-buttons = main_tab._segmented_button._buttons_dict
-
-# Initial Icon Setup (3 Different Icons)
-icons = [icon1, icon2, icon3]  # Initial icons for each tab
-# selected_icons = [icon1_selected, icon2_selected, icon3_selected] 
-
-
-for i, (name, btn) in enumerate(buttons.items()):
-    btn.configure(text=" ", image=icons[i], bg_color="transparent") 
+from customtkinter import *
+import google.generativeai as ai
 
 
 
-for j, (name, btn) in enumerate(buttons.items()):
-    if j == 0:
-        btn.configure(text=tab_names[j], image=icons[j])  # Show text + new icon
-    else:
-        btn.configure(text=" ", image=icons[j])
+API_KEY = "AIzaSyCKQG_yy-weC61CylnUutQJZvCaRJlsiOI"
+ai.configure(api_key=API_KEY)
+model = ai.GenerativeModel("gemini-2.0-flash")
+conversation = model.start_chat()
 
 
-# Function to Update Tabs
-def update_tabs(selected_index):
-    main_tab.set(tab_names[selected_index])
+messages =""
 
-    for i, (name, btn) in enumerate(buttons.items()):
-        if i == selected_index:
-            btn.configure(text=tab_names[i], image=icons[i])
-              # Show text + new icon
-        else:
-            btn.configure(text=" ", image=icons[i])  # Show only original icon
 
-# Bind Click Events to Tabs
-for i, btn in enumerate(buttons.values()):
-    btn.configure(command=lambda idx=i: update_tabs(idx))
+def chat():
+    global messages
 
-# Run the App
+    chatbot_chatbox.configure(state="normal")
+
+    message = chatbot_entry.get().strip()
+    chatbot_chatbox.insert(END, f"You: {message}\n\n")
+    
+    try:
+        if not message:
+            chatbot_chatbox.insert(END, f"Chatbot: Please enter a valid message. \n\n")
+
+        if message.lower() == 'bye':
+            chatbot_chatbox.insert(END, f"Chatbot: Goodbye! \n\n")
+    
+        response = conversation.send_message(message)
+        chatbot_chatbox.insert(END, f"Chatbot: {response.text} \n\n")
+
+    except Exception as e:
+        error = f"Error: {str(e)}. Please try again."
+        chatbot_chatbox.insert(END, f"Chatbot: {error}\n\n")
+        # print("error")
+            
+    chatbot_entry.delete(0, END)
+    chatbot_chatbox.configure(state="disabled")
+    
+
+
+
+
+root = CTk()
+
+root.geometry("400x500")
+root.title("Chat Bot")
+
+
+chatbot_frame = CTkFrame(root, fg_color="light blue", width=400, height=500 )
+chatbot_frame.pack(side="top", expand=True, fill="both",)
+
+
+
+chatbot_chatbox = CTkTextbox(chatbot_frame, font=("JetBrains Mono", 15, "bold"), state="normal", width=400, height=400, text_color="white")
+chatbot_chatbox.pack(side="top", anchor="w", padx=1, pady=5 )
+chatbot_chatbox.insert(1.0, "Chatbot: Hello! Type your message or type 'bye' to exit. \n\n")
+chatbot_chatbox.configure(state="disabled")
+
+chatbot_entry = CTkEntry(chatbot_frame, font=("JetBrains Mono", 15, "bold"), width=320, height=50, fg_color="white", text_color="black")
+chatbot_entry.pack( anchor="w", padx=1, pady=0)
+
+chatbot_send_btn = CTkButton(chatbot_frame, font=("Helvetica", 16, "bold"), text="Send", width=70, height=46, command = chat,)
+chatbot_send_btn.place( x=327+35, y=412+23, anchor="center")
+
+
 root.mainloop()
