@@ -4,7 +4,7 @@ from customtkinter import *
 import google.generativeai as ai
 import threading
 
-API_KEY = "AIzaSyCKQG_yy-weC61CylnUutQJZvCaRJlsiOI"
+API_KEY = ""
 ai.configure(api_key=API_KEY)
 model = ai.GenerativeModel("gemini-2.0-flash")
 conversation = model.start_chat()
