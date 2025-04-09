@@ -72,7 +72,8 @@ def convaercurrency():
             else:
                 to_lable.configure(text=n)
         else:
-            to_lable.configure(text="Error")
+            # to_lable.configure(text=ans)
+            pass
             
 
 

@@ -114,8 +114,8 @@ def convertcurrency():
     frm = from_convart_box.get()
     to = to_convart_box.get()
     try:
-        ans=str(c.convert(n,frm,to))
-        ans=str(round(ans,2))
+        ans=c.convert(n,frm,to)
+        ans=round(ans,2)
         to_lable.configure(text=str(ans))
     except:
         if frm =='BDT' or to == 'BDT':
@@ -132,7 +132,8 @@ def convertcurrency():
             else:
                 to_lable.configure(text=n)
         else:
-            to_lable.configure(text=n)
+            # to_lable.configure(text=str(ans))
+            pass
 
 # currency convator functions end
 
