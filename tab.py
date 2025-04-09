@@ -7,8 +7,11 @@ from CTkScrollableDropdown import CTkScrollableDropdown
 
 set_appearance_mode("dark")
 set_default_color_theme('dark-blue')
-c=CurrencyConverter()
 
+
+
+
+c=CurrencyConverter()
 
 font_12 = ("Helvetica",12,"bold")
 font_16 = ("Helvetica",16,"bold")
@@ -150,10 +153,10 @@ def update_tabs(s_tab):
 
 
 
-main_windo = CTk()                                                                 # main window
-main_windo.geometry("500x600")
+main_cal_windo = CTk()                                                                 # main window
+main_cal_windo.geometry("500x600")
 
-mode_change_btn=CTkButton(main_windo,
+mode_change_btn=CTkButton(main_cal_windo,
                           text="L",
                           text_color="black",
                           fg_color="white",
@@ -164,7 +167,7 @@ mode_change_btn=CTkButton(main_windo,
                           font=font_16)
 mode_change_btn.place(x=468,y=10)
 
-main_tab = CTkTabview(main_windo, width=430, height=500)                           # main tab
+main_tab = CTkTabview(main_cal_windo, width=430, height=500)                           # main tab
 main_tab.pack()
 
 
@@ -371,4 +374,4 @@ for j, (name, btn) in enumerate(tab_buttons.items()):
 for i, btn in enumerate(tab_buttons.values()):
     btn.configure(command=lambda tab_n=i: update_tabs(tab_n))
 
-main_windo.mainloop()
+main_cal_windo.mainloop()
