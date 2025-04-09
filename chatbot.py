@@ -67,7 +67,7 @@ def open_chatbot(chatbot_main_windo):
     chatbot_frame = CTkFrame(chatbot_main_windo, fg_color="light blue", width=400, height=500 )
     chatbot_frame.pack(side="top", expand=True, fill="both",)
 
-    chatbot_chatbox = CTkTextbox(chatbot_frame, wrap="word", font=("JetBrains Mono", 14), state="normal", width=400, height=400, text_color="white")
+    chatbot_chatbox = CTkTextbox(chatbot_frame, wrap="word", font=("JetBrains Mono", 14), state="normal", width=400, height=400, text_color="white",  fg_color="black")
     chatbot_chatbox.pack(side="top", anchor="w", padx=1, pady=5 )
     chatbot_chatbox.insert(1.0, "Chatbot: Hello! Type your message that you want to know... \n\n")
     chatbot_chatbox.configure(state="disabled")
