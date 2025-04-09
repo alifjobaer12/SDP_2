@@ -15,7 +15,7 @@ unit_converter_frame.pack(fill="both", expand=True)
 
 
 btn_frame = CTkFrame(unit_converter_frame, fg_color="transparent", width=120, height=500)
-btn_frame.pack(fill="both", expand=True, side="left")
+btn_frame.pack(fill="both", expand=False, side="left")
 
 converter_frame = CTkFrame(unit_converter_frame, fg_color="green", width=280)
 converter_frame.pack(fill="both", expand=True, side="right")
