@@ -2,7 +2,6 @@ from customtkinter import *
 import google.generativeai as ai
 import threading
 import time
-from test import open_chatbot
 
 
 API_KEY = ""
@@ -15,9 +14,6 @@ messages =""
 
 
 
-def open_cb():
-    btn.pack_forget()
-    open_chatbot(root)
 
 def clear_chat():
     # time.sleep(1)
@@ -73,8 +69,6 @@ root = CTk()
 root.geometry("400x500")
 root.title("Chat Bot")
 
-btn = CTkButton(root, text="Open Chat Bot", command=open_cb, width=200, height=50)
-btn.pack(pady=20)
 
 chatbot_frame = CTkFrame(root, fg_color="light blue", width=400, height=500 )
 chatbot_frame.pack(side="top", expand=True, fill="both",)
