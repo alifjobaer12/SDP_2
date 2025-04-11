@@ -392,14 +392,18 @@ def open_calculator(main_cal_windo):
     from_convart_box= CTkComboBox(windo,
                                   values=cuntry,
                                   justify='center',
-                                  font=font_14)
+                                  font=font_14,
+                                  state="readonly")
+    from_convart_box.set("USD")
     from_convart_box.place(x=40,y=85)
     from_box_deopdown = CTkScrollableDropdown(from_convart_box, values=cuntry)
 
     to_convart_box=CTkComboBox(windo,
                                values=cuntry,
                                justify='center',
-                               font=font_14)
+                               font=font_14,
+                               state="readonly")
+    to_convart_box.set("BDT")
     to_convart_box.place(x=250,y=85)
     to_box_deopdown = CTkScrollableDropdown(to_convart_box, values=cuntry)
 
