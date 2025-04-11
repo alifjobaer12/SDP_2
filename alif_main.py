@@ -32,7 +32,7 @@ def lonch_chatbot_btn():
 
 
 main_windo = CTk()                                                              
-main_windo.geometry("500x600")
+main_windo.geometry("500x650")
 main_windo.title("Calculator")
 
 btn = CTkButton(main_windo, text="Open Calculator", font=("Helvetica", 14, "bold"), width=150, height=45, command=lonch_cal_btn)
