@@ -1,3 +1,5 @@
+import math
+import re
 from customtkinter import *
 from currency_converter import *
 from tkinter import *
@@ -61,6 +63,72 @@ def open_calculator(main_cal_windo):
         input_box.delete(1.0,"end")
         input_box.configure(state="disabled")
 
+
+    def percentage():
+        nonlocal input_num
+        try:
+            # Match the last number and operator before %
+            match = re.search(r'([\d\.]+)([\+\-\*/])([\d\.]+)%$', input_num)
+            if match:
+                first, operator, percent = match.groups()
+                new_expr = f"{first}{operator}({first}*{percent}/100)"
+                input_num = re.sub(r'([\d\.]+[\+\-\*/][\d\.]+)%$', new_expr, input_num)
+            else:
+                # Handle single number % like 50% = 0.5
+                match = re.search(r'([\d\.]+)%$', input_num)
+                if match:
+                    num = match.group(1)
+                    input_num = re.sub(r'([\d\.]+)%$', f"({num}/100)", input_num)
+        except:
+            clear()
+            input_box.configure(state="normal")
+            input_box.insert(1.0,"Error")
+            input_box.configure(state="disabled")
+
+
+    def square():
+        nonlocal input_num
+        try:
+            result = float(input_num) ** 2
+            input_num = str(result)
+            input_box.configure(state="normal")
+            input_box.delete(1.0, "end")
+            input_box.insert(1.0, input_num)
+            input_box.configure(state="disabled")
+        except:
+            clear()
+            input_box.configure(state="normal")
+            input_box.insert(1.0,"Error")
+            input_box.configure(state="disabled")
+
+
+    def square_root():
+        nonlocal input_num
+        try:
+            result = math.sqrt(float(input_num))
+            input_num = str(result)
+            input_box.configure(state="normal")
+            input_box.delete(1.0, "end")
+            input_box.insert(1.0, input_num)
+            input_box.configure(state="disabled")
+        except:
+            clear()
+            input_box.configure(state="normal")
+            input_box.insert(1.0,"Error")
+            input_box.configure(state="disabled")
+
+
+    def backspace():
+        nonlocal input_num
+        if input_num:  
+            input_num = input_num[:-1]  
+            input_box.configure(state="normal")
+            input_box.delete(1.0, "end")  
+            input_box.insert(1.0, input_num)  
+            input_box.configure(state="disabled")
+
+
+
     #   calculator functions end
 
 
@@ -108,6 +176,7 @@ def open_calculator(main_cal_windo):
         from_convart_box.set(too)
         to_convart_box.set(form)
 
+
     def convertcurrency():
         nonlocal n, frm
         try:
@@ -135,8 +204,8 @@ def open_calculator(main_cal_windo):
                 else:
                     to_lable.configure(text=n)
             else:
-                # to_lable.configure(text=str(ans))
-                pass
+                to_lable.configure(text="Error")
+                
 
     # currency convator functions end
 
@@ -212,39 +281,50 @@ def open_calculator(main_cal_windo):
     num_close_brackt = CTkButton(calculator_fram, width=60, height=60 ,font=font_16, text=")", fg_color="#74cec6",  text_color="black", command=lambda :valu_input(")"))
     num_close_brackt.grid(row=1, column=3, padx=5, pady=5)
 
+    
+    backSpace = CTkButton(calculator_fram, width=60, height=60,font=font_16, text="⌫", text_color="#eb7546", fg_color="#74cec6", command=backspace)
+    backSpace.grid(row=1, column=4, padx=5, pady=5)
+    Square = CTkButton(calculator_fram, width=60, height=60,font=font_16, text="x²", text_color="#f0e6ad", fg_color="#0f1320", command=square)
+    Square.grid(row=2, column=2, padx=5, pady=5)
+    Square_root = CTkButton(calculator_fram, width=60, height=60,font=font_16, text="√", text_color="#f0e6ad", fg_color="#0f1320", command=square_root)
+    Square_root.grid(row=2, column=3, padx=5, pady=5)
+    perCentage = CTkButton(calculator_fram, width=60, height=60,font=font_16, text="%", text_color="#f0e6ad", fg_color="#0f1320",command=lambda: (valu_input("%"), percentage()))
+    perCentage.grid(row=2, column=1, padx=5, pady=5)
+
+
     num_1 = CTkButton(calculator_fram, width=60, height=60 ,font=font_16, text="1", fg_color="#0f1320", command=lambda: valu_input("1"))
-    num_1.grid(row=4, column=1, padx=5, pady=5)
+    num_1.grid(row=5, column=1, padx=5, pady=5)
     num_2 = CTkButton(calculator_fram, width=60, height=60,font=font_16, text="2", fg_color="#0f1320", command=lambda: valu_input("2"))
-    num_2.grid(row=4, column=2, padx=5, pady=5)
+    num_2.grid(row=5, column=2, padx=5, pady=5)
     num_3 = CTkButton(calculator_fram, width=60, height=60,font=font_16, text="3", fg_color="#0f1320", command=lambda: valu_input("3"))
-    num_3.grid(row=4, column=3, padx=5, pady=5)
+    num_3.grid(row=5, column=3, padx=5, pady=5)
     num_4 = CTkButton(calculator_fram, width=60, height=60,font=font_16, text="4", fg_color="#0f1320", command=lambda: valu_input("4"))
-    num_4.grid(row=3, column=1, padx=5, pady=5)
+    num_4.grid(row=4, column=1, padx=5, pady=5)
     num_5 = CTkButton(calculator_fram, width=60, height=60,font=font_16, text="5", fg_color="#0f1320", command=lambda: valu_input("5"))
-    num_5.grid(row=3, column=2, padx=5, pady=5)
+    num_5.grid(row=4, column=2, padx=5, pady=5)
     num_6 = CTkButton(calculator_fram, width=60, height=60,font=font_16, text="6", fg_color="#0f1320", command=lambda: valu_input("6"))
-    num_6.grid(row=3, column=3, padx=5, pady=5)
+    num_6.grid(row=4, column=3, padx=5, pady=5)
     num_7 = CTkButton(calculator_fram, width=60, height=60,font=font_16, text="7", fg_color="#0f1320", command=lambda: valu_input("7"))
-    num_7.grid(row=2, column=1, padx=5, pady=5)
+    num_7.grid(row=3, column=1, padx=5, pady=5)
     num_8 = CTkButton(calculator_fram, width=60, height=60,font=font_16, text="8", fg_color="#0f1320", command=lambda: valu_input("8"))
-    num_8.grid(row=2, column=2, padx=5, pady=5)
+    num_8.grid(row=3, column=2, padx=5, pady=5)
     num_9 = CTkButton(calculator_fram, width=60, height=60,font=font_16, text="9", fg_color="#0f1320", command=lambda: valu_input("9"))
-    num_9.grid(row=2, column=3, padx=5, pady=5)
+    num_9.grid(row=3, column=3, padx=5, pady=5)
     num_0 = CTkButton(calculator_fram, width=60, height=60,font=font_16, text="0", fg_color="#0f1320", command=lambda: valu_input("0"))
-    num_0.grid(row=5, column=2, padx=5, pady=5)
+    num_0.grid(row=6, column=2, padx=5, pady=5)
     num_0 = CTkButton(calculator_fram, width=60, height=60,font=font_16, text=".", fg_color="#0f1320", command=lambda: valu_input("."))
-    num_0.grid(row=5, column=1, padx=5, pady=5)
+    num_0.grid(row=6, column=1, padx=5, pady=5)
     num_eq = CTkButton(calculator_fram, width=60, height=60,font=font_16, text="=", fg_color="#0f1320", command=calculation)
-    num_eq.grid(row=5, column=3, padx=5, pady=5)
+    num_eq.grid(row=6, column=3, padx=5, pady=5)
 
     num_plus = CTkButton(calculator_fram, width=60, height=130,font=font_16, text="+", text_color="black", fg_color="#74cec6", command=lambda: valu_input("+"))
-    num_plus.grid(row=4, column=4,rowspan=2, padx=5, pady=5)
+    num_plus.grid(row=5, column=4,rowspan=2, padx=5, pady=5)
     num_minus = CTkButton(calculator_fram, width=60, height=60,font=font_24, text="-", text_color="black", fg_color="#74cec6", command=lambda: valu_input("-"))
-    num_minus.grid(row=3, column=4, padx=5, pady=5)
+    num_minus.grid(row=4, column=4, padx=5, pady=5)
     num_mul = CTkButton(calculator_fram, width=60, height=60,font=font_24, text="*", text_color="black", fg_color="#74cec6", command=lambda: valu_input("*"))
-    num_mul.grid(row=2, column=4, padx=5, pady=5)
+    num_mul.grid(row=3, column=4, padx=5, pady=5)
     num_div = CTkButton(calculator_fram, width=60, height=60,font=font_18, text="/", text_color="black", fg_color="#74cec6", command=lambda: valu_input("/"))
-    num_div.grid(row=1, column=4, padx=5, pady=5)
+    num_div.grid(row=2, column=4, padx=5, pady=5)
 
 
 
