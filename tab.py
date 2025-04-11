@@ -282,13 +282,13 @@ def open_calculator(main_cal_windo):
     num_close_brackt.grid(row=1, column=3, padx=5, pady=5)
 
     
-    backSpace = CTkButton(calculator_fram, width=60, height=60,font=font_16, text="⌫", text_color="#eb7546", fg_color="#74cec6", command=backspace)
+    backSpace = CTkButton(calculator_fram, width=60, height=60,font=font_16, text="⌫", text_color="red", fg_color="#74cec6", command=backspace)
     backSpace.grid(row=1, column=4, padx=5, pady=5)
-    Square = CTkButton(calculator_fram, width=60, height=60,font=font_16, text="x²", text_color="#f0e6ad", fg_color="#0f1320", command=square)
+    Square = CTkButton(calculator_fram, width=60, height=60 ,font=font_16, text="x²", fg_color="#0f1320",  command=square)
     Square.grid(row=2, column=2, padx=5, pady=5)
-    Square_root = CTkButton(calculator_fram, width=60, height=60,font=font_16, text="√", text_color="#f0e6ad", fg_color="#0f1320", command=square_root)
+    Square_root = CTkButton(calculator_fram, width=60, height=60 ,font=font_18, text="√", fg_color="#0f1320",  command=square_root)
     Square_root.grid(row=2, column=3, padx=5, pady=5)
-    perCentage = CTkButton(calculator_fram, width=60, height=60,font=font_16, text="%", text_color="#f0e6ad", fg_color="#0f1320",command=lambda: (valu_input("%"), percentage()))
+    perCentage = CTkButton(calculator_fram, width=60, height=60 ,font=font_16, text="%", fg_color="#0f1320",  command=lambda: (valu_input("%"), percentage()))
     perCentage.grid(row=2, column=1, padx=5, pady=5)
 
 
